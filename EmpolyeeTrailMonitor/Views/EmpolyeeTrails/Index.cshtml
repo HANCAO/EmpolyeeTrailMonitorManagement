@@ -1,0 +1,126 @@
+﻿@*@model IEnumerable<EmpolyeeTrailMonitor.Models.EmpolyeeTrail>*@
+
+@*分页显示*@
+@model PaginatedList<EmpolyeeTrailMonitor.Models.EmpolyeeTrail>
+
+@{
+    ViewData["Title"] = "数据集";
+}
+
+<h1>员工行径数据集合</h1>
+
+<p>数据总记录：@ViewData["DataCount"] 条 , 共有记录员工：@ViewData["EmpolyeeCount"]个</p>
+
+@*搜索框*@
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            指定员工: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">显示所有员工</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>经度<br />GPSX</th>
+            <th>纬度<br />GPSY</th>
+            <th>百度纬度<br />BmapLap</th>
+            <th>百度经度<br />BmapLng</th>
+            <th>记录时间<br />CreateTime</th>
+            <th>员工工号<br />CreateUser</th>
+            <th>乘车<br />IsCar</th>
+            <th>行动距离<br />Distance</th>
+            <th>间隔时间<br />DistanceSecond</th>
+            @*<th></th>*@
+        </tr>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.GPSX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GPSY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BmapLap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BmapLng)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistanceSecond)
+            </th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GPSX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GPSY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BmapLap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BmapLng)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DistanceSecond)
+                </td>
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">编辑</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">详细</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">删除</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex - 1)" 
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    下一页
+</a>
+

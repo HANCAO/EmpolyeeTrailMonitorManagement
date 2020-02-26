@@ -1,0 +1,72 @@
+﻿@model EmpolyeeTrailMonitor.Models.EmpolyeeTrail
+
+@{
+    ViewData["Title"] = "详细数据";
+}
+
+<h1>详细数据</h1>
+
+<div>
+    <h4>EmpolyeeTrail</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GPSX)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GPSX)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GPSY)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GPSY)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BmapLap)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BmapLap)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BmapLng)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BmapLng)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateUser)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreateUser)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsCar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsCar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DistanceSecond)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DistanceSecond)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">返回列表</a>
+</div>
