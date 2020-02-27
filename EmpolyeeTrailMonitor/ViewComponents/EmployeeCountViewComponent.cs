@@ -22,7 +22,7 @@ namespace EmpolyeeTrailMonitor.ViewComponents
             //获取员工个数
             ViewData["EmpolyeeCount"] = empolyeeTrails.EmpolyeeTrail.Select(s => s.CreateUser).Distinct().Count();
 
-            return View();
+            return await Task.Run(function:()=>View());
         }
     }
 }
