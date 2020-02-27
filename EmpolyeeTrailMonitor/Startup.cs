@@ -1,4 +1,5 @@
 using EmpolyeeTrailMonitor.Data;
+using EmpolyeeTrailMonitor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ namespace EmpolyeeTrailMonitor
 
         public IConfiguration Configuration { get; }
 
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -24,6 +27,9 @@ namespace EmpolyeeTrailMonitor
             //注册数据库上下文
             services.AddDbContext<EmpolyeeTrailContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("EmpolyeeTrailContext")));
+
+            //注册服务
+            //services.AddSingleton<IEmpolyeeTrailService, EmpolyeeTrailService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

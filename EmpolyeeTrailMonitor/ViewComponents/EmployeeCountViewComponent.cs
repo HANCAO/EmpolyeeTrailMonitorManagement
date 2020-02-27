@@ -21,8 +21,7 @@ namespace EmpolyeeTrailMonitor.ViewComponents
             ViewData["DataCount"] = empolyeeTrails.EmpolyeeTrail.Count();
             //获取员工个数
             ViewData["EmpolyeeCount"] = empolyeeTrails.EmpolyeeTrail.Select(s => s.CreateUser).Distinct().Count();
-
-            return View();
+            return await Task.Run(()=>View());
         }
     }
 }

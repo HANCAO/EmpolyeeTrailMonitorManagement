@@ -10,7 +10,7 @@
 <h1>员工行径数据集合</h1>
 
 @*<p>数据总记录：@ViewData["DataCount"] 条 , 共有记录员工：@ViewData["EmpolyeeCount"]个</p>*@
-@await Component.InvokeAsync("EmployeeCount")
+@await Task.Run(function: () => Component.InvokeAsync("EmployeeCount"))
 
 @*搜索框*@
 <form asp-action="Index" method="get">
@@ -35,36 +35,6 @@
             <th>乘车<br />IsCar</th>
             <th>行动距离<br />Distance</th>
             <th>间隔时间<br />DistanceSecond</th>
-            @*<th></th>*@
-        </tr>
-        <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.GPSX)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GPSY)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BmapLap)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BmapLng)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateUser)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsCar)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Distance)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DistanceSecond)
-                </th>*@
         </tr>
     </thead>
     <tbody>
@@ -98,13 +68,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DistanceSecond)
                 </td>
-                @*<td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">编辑</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">详细</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">删除</a>
-                    </td>*@
             </tr>
         }
+
     </tbody>
 </table>
 

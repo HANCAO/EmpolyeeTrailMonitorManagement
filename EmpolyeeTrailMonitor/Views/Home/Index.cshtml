@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        @await Component.InvokeAsync("EmployeeCount")
+        @await Task.Run(function: ()=> Component.InvokeAsync("EmployeeCount"))
 
         <button type="button" class="btn btn-success">8888</button>
     </div>
