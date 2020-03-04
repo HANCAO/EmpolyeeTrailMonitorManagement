@@ -13,7 +13,7 @@ namespace EmpolyeeTrailMonitor.ViewComponents
         public EmployeeCountViewComponent(EmpolyeeTrailContext empolyeeTrails)
         {
             this.empolyeeTrails = empolyeeTrails;
-        }
+        } 
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
