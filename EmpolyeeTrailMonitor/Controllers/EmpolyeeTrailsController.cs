@@ -14,23 +14,26 @@ namespace EmpolyeeTrailMonitor.Controllers
     {
         private readonly EmpolyeeTrailContext _context;
 
+        public ActionResult Show()
+        {
+            return View();
+        }
+
         public EmpolyeeTrailsController(EmpolyeeTrailContext context)
         {
             _context = context;
         }
 
-        // GET: EmpolyeeTrails
+        // 显示碎片化数据内容页面
         public async Task<IActionResult> Index(string searchString, int? pageNumber, string currentFilter)
         {
             var empolyeeTrails = from s in _context.EmpolyeeTrail select s;
 
             //添加搜索框
-            if (searchString != null)
-            {
+            if (searchString != null){
                 pageNumber = 1;
             }
-            else
-            {
+            else{
                 searchString = currentFilter;
             }
 
@@ -47,11 +50,9 @@ namespace EmpolyeeTrailMonitor.Controllers
             //添加分页
             int pageSize = 20;
             return View(await PaginatedList<EmpolyeeTrail>.CreateAsync(empolyeeTrails.AsNoTracking(), pageNumber ?? 1, pageSize));
-
-            //return View(await _context.EmpolyeeTrail.ToListAsync());
         }
 
-        // GET: EmpolyeeTrails/Details/5
+        // 显示指定ID用户数据
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -69,29 +70,8 @@ namespace EmpolyeeTrailMonitor.Controllers
             return View(empolyeeTrail);
         }
 
-        // GET: EmpolyeeTrails/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: EmpolyeeTrails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GPSX,GPSY,BmapLap,BmapLng,CreateTime,CreateUser,IsCar,Distance,DistanceSecond")] EmpolyeeTrail empolyeeTrail)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(empolyeeTrail);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(empolyeeTrail);
-        }
-
-        // GET: EmpolyeeTrails/Edit/5
+        
+        // 编辑指定用户数据
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,9 +87,6 @@ namespace EmpolyeeTrailMonitor.Controllers
             return View(empolyeeTrail);
         }
 
-        // POST: EmpolyeeTrails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,GPSX,GPSY,BmapLap,BmapLng,CreateTime,CreateUser,IsCar,Distance,DistanceSecond")] EmpolyeeTrail empolyeeTrail)
@@ -142,7 +119,7 @@ namespace EmpolyeeTrailMonitor.Controllers
             return View(empolyeeTrail);
         }
 
-        // GET: EmpolyeeTrails/Delete/5
+        // 删除指定用户数据
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,7 +137,6 @@ namespace EmpolyeeTrailMonitor.Controllers
             return View(empolyeeTrail);
         }
 
-        // POST: EmpolyeeTrails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -175,5 +151,35 @@ namespace EmpolyeeTrailMonitor.Controllers
         {
             return _context.EmpolyeeTrail.Any(e => e.Id == id);
         }
+
+        public JsonResult ReadTableList()//string searchString, int? pageNumber, string currentFilter
+        {
+            var empolyeeTrails = from s in _context.EmpolyeeTrail select s;
+            var  curlist = empolyeeTrails.Take(1000).ToList();
+            ////添加搜索框
+            //if (searchString != null)
+            //{
+            //    pageNumber = 1;
+            //}
+            //else
+            //{
+            //    searchString = currentFilter;
+            //}
+
+            ////获取数据总行数
+            //ViewData["DataCount"] = empolyeeTrails.Count();
+            ////获取员工个数
+            //ViewData["EmpolyeeCount"] = empolyeeTrails.Select(s => s.CreateUser).Distinct().Count();
+
+            //ViewData["CurrentFilter"] = searchString;
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    empolyeeTrails = empolyeeTrails.Where(s => s.CreateUser.Contains(searchString));
+            //}
+
+            return Json(new { rows = curlist });  // curList就等于你查出来的empolyeeTrails
+
+        }
+
     }
 }
